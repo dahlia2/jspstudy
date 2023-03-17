@@ -1,4 +1,4 @@
-package practice03;
+package practice04;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/Practice03_1")
-public class Practice03_1 extends HttpServlet {
+@WebServlet("/Practice04_1")
+public class Practice04_1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
