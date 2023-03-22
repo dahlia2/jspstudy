@@ -42,7 +42,7 @@
 			<input type="text" name="age" placeholder="나이">
 			<input type="button" id="btn2" value="JSON요청">
 		</form>
-			<div id="content2"></div>
+		<div id="content2"></div>
 	</div>
 	<script>
 		$('#btn2').on('click', function(){
@@ -56,8 +56,8 @@
 				dataType: 'json',
 				success: (resData)=>{ 
 					// resData == {"name": '마돈나', "age": 50} -> jSON 객체를 string한 것  // text로 보냈지만 json으로 응답 타입을 명시했기에 자동으로 객체 처리가 됨
-					$('#content2').append($('<div>').text(resData));
-					$('#content2').append($('<div>').text(resData.name));
+					$('#content2').append($('<div>').text(resData));  // [object Object]
+					$('#content2').append($('<div>').text(resData.name));  // input name=name의 value값
 					
 				}
 	

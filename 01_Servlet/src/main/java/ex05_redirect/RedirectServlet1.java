@@ -20,7 +20,7 @@ public class RedirectServlet1 extends HttpServlet {
 		String model = request.getParameter("model");
 		System.out.println("RedirectServlet1 : " + model);
 		
-		// redirect를 이용해서 다른 서블릿(다른 서버 경로으로 이동하기
+		// redirect를 이용해서 다른 서블릿(다른 서버 경로로 이동하기)
 		response.sendRedirect("/01_Servlet/RedirectServlet2"); // RedirectServlet2으로 이동하라고 다시 응답해주는 것
 
 	}

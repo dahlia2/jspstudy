@@ -63,11 +63,7 @@ public class JSONServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 		}
 		
-		
-		
-		
-		
-		
+
 	}
 
 	
