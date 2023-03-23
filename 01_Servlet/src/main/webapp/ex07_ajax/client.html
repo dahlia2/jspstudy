@@ -54,16 +54,49 @@
 				data: $('#frm_person').serialize(), // form 내부의 모든 입력 요소(name 속성이 파라미터로 인식된다.)
 				/* 응답 */
 				dataType: 'json',
-				success: (resData)=>{ 
-					// resData == {"name": '마돈나', "age": 50} -> jSON 객체를 string한 것  // text로 보냈지만 json으로 응답 타입을 명시했기에 자동으로 객체 처리가 됨
-					$('#content2').append($('<div>').text(resData));  // [object Object]
+				success: (resData)=>{  
+					// resData == {"name": "입력값", "age": 입력값} -> jSON  obj를 string한 것  // text로 보냈지만 json으로 응답 타입을 명시했기에 자동으로 객체 처리가 됨
+				   
+					// $('#content2').append($('<div>').text(resData));  // [object Object]
 					$('#content2').append($('<div>').text(resData.name));  // input name=name의 value값
-					
+					$('#content2').append($('<div>').text(resData.age));
+				},
+				error: (jqXHR)=>{
+					$('#content2').append($('<div>').text(jqXHR.status));
+					$('#content2').append($('<div>').text(jqXHR.responseText));
 				}
-	
 			})
 			
-			
+		})
+	</script>
+	
+	<div>
+		<form id="frm_book">
+			<input type="text" name="title" placeholder="제목">
+			<input type="text" name="author" placeholder="저자">
+			<input type="text" name="price" placeholder="가격">
+			<input type="button" id="btn3" value="XML요청">
+		</form>
+		<div id="content3"></div>
+	</div>
+	<script>
+		$('#btn3').on('click', function(){
+			$('#content3').empty();
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url: '/01_Servlet/XMLServlet',
+				data: $('#frm_book').serialize(),
+				/* 응답 */
+				dataType: 'xml',
+				success: (resData)=>{
+					var ul = $('<ul>');
+					ul.append($('<li>').text('제목 : ' + $(resData).find('title').text()));
+					ul.append($('<li>').text('저자 : ' + $(resData).find('author').text()));
+					ul.append($('<li>').text('가격 : ' + $(resData).find('price').text() + '원'));
+					$('#content3').append(ul);
+				}
+			})
 		})
 	</script>
 
