@@ -25,7 +25,7 @@ public class AirKoreaApiServlet extends HttpServlet {
 		// 요청 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
-		// 요청 파라미터
+		// 요청받은 파라미터 꺼내기
 		String sidoName = request.getParameter("sidoName");
 		String returnType = request.getParameter("returnType");
 		
@@ -35,9 +35,10 @@ public class AirKoreaApiServlet extends HttpServlet {
 		
 		// 요청 주소
 		String apiURL = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
+		// 파라미터 이어붙이기 작업
 		apiURL += "?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8");
 		apiURL += "&sidoName=" + URLEncoder.encode(sidoName, "UTF-8");
-		apiURL += "&returnType=" + URLEncoder.encode(returnType, "UTF-8"); // 영어이기 때문에 꼭 인코딩 안 해도 되지만 통일을 위해 하는 걸 권장
+		apiURL += "&returnType=" + URLEncoder.encode(returnType, "UTF-8");  // 영어라서 인코딩 필수는 아니지만, 통일을 위해 하는 걸 권장
 		
 		// URL
 		URL url = new URL(apiURL);
@@ -62,7 +63,7 @@ public class AirKoreaApiServlet extends HttpServlet {
 		// 입력 (API의 응답 결과를 StringBulder에 저장)
 		StringBuilder sb = new StringBuilder();
 		String line = null;
-		while((line = reader.readLine()) != null) {
+		while((line = reader.readLine()) != null) {  // reader가 한 줄씩 읽어온 값이 null이 아니면 이어붙여줌
 			sb.append(line);
 		}
 		

@@ -49,8 +49,9 @@
 		
 		function fnXml(resData){
 			$.each($(resData).find('item'), (i, element)=>{
+				console.log(element);
 				$('#content1').append($(element).find('stationName').text() + '<br>');
-			})
+			})  // 데이터를 한줄씩 나열하기 위해 <br>태그
 		}
 		
 		function fnJson(resData){
