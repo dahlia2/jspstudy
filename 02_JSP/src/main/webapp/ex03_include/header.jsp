@@ -8,8 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	Optional<String> opt = Optional.ofNullable(request.getParameter("title"));
-	String title = opt.orElse("환영합니다");
-%>
+	String title = opt.orElse("환영합니다");z
 <title><%=title%></title>
 <%-- request.getContextPath() == /02_Jsp --%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css">  <!-- css 파일 가져오기  --> <!-- contextpath는 webapp  -->
