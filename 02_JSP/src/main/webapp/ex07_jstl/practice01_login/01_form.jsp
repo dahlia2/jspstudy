@@ -11,7 +11,8 @@
 </head>
 <body>
 
-	<c:if test="${sessionScope.loginId == null}">
+	<c:choose>
+		<c:when test="${sessionScope.loginId == null}">
 		<div>
 			<form method="post" action="${contextPath}/ex07_jstl/practice01_login/02_login.jsp">
 				<div><input type="text" name="id" placeholder="아이디"></div>
@@ -19,13 +20,14 @@
 				<div><button>로그인</button></div>
 			</form>
 		</div>
-	</c:if>
-	<c:if test="${sessionScope.loginId != null }">
-		<div>
-			${sessionScope.loginId}님 반갑습니다.
-			<input type="button" value="로그아웃" id="btn_logout">
-		</div>
-	</c:if>
+		</c:when>
+		<c:otherwise>
+			<div>
+				${sessionScope.loginId}님 반갑습니다.
+				<input type="button" value="로그아웃" id="btn_logout">
+			</div>
+		</c:otherwise>
+	</c:choose>
 	
 	<script>
 		$('#btn_logout').on('click', function(){
