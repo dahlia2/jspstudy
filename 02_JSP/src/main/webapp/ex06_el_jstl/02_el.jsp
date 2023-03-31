@@ -87,7 +87,7 @@
 		book.put("author", "생텍쥐베리");
 		book.put("title", "어린왕자");
 		book.put("price", 10000);
-		pageContext.setAttribute("book", book);  // EL 사용을 위해서 pageContext에 저장한다.
+		pageContext.setAttribute("book", book);   // EL 사용을 위해서 pageContext에 저장한다.
 	%>
 	
 	<ul>

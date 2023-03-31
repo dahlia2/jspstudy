@@ -19,7 +19,7 @@ public class Webtoon {
 		this.webtoonNo = webtoonNo;
 		this.title = title;
 		this.star = star;
-		this.uploadDate = uploadDate;
+		this.uploadDate = uploadDate; 
 	}
 
 	public int getWebtoonNo() {
