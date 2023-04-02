@@ -25,6 +25,7 @@
 				
 				// session의 id를(사용자의 id가 아님) 쿠키에 저장한다.
 				Cookie cookie1 = new Cookie("session_id", session.getId());
+				// System.out.println(session.getId() + ", " + request.getContextPath());
 				cookie1.setMaxAge(60 * 60 * 24 * 30);
 				cookie1.setPath(request.getContextPath());
 				response.addCookie(cookie1);

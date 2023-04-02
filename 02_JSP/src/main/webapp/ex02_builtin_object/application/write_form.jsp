@@ -11,7 +11,6 @@
 
 	<div>
 		<form action="<%=request.getContextPath()%>/ex02_builtin_object/application/save.jsp" method="post">
-		
 			<div>
 				<label for="created_date">작성일자</label>
 				<input type="text" name="created_date" id="created_date" value="<%=LocalDate.now()%>" readonly>

@@ -39,6 +39,7 @@ public class UploadServlet extends HttpServlet {
 		
 		// 업로드 경로 (서버의 real path를 사용하거나 일반 경로를 사용할 수 있다.)
 		String realPath = request.getServletContext().getRealPath("storage"); 
+		System.out.println(realPath);
 		File dir = new File(realPath);
 		if(dir.exists() == false) {
 			dir.mkdirs();
@@ -64,7 +65,7 @@ public class UploadServlet extends HttpServlet {
 		String name = file.getName();
 		String parent = file.getParent();
 		String lastModified = new SimpleDateFormat("yyyy-MM-dd").format(file.lastModified());
-		String size = new DecimalFormat("#,##0").format(file.length() / 1024 + (file.length() % 1024 == 0 ? 0 : 1));
+		String size = new DecimalFormat("#,##0").format(file.length() / 1024 + (file.length() % 1024 == 0 ? 1 : 0));
 		
 		// 응답
 		response.setContentType("text/html; charset=UTF-8");

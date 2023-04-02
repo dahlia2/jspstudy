@@ -8,14 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${today != null}">
-		<h1>오늘은 ${today}입니다.</h1>
-	</c:if>
-	<c:if test="${age != null}">
-		<h1>나이는 ${age}살입니다.</h1>
-	</c:if>
-	<c:if test="${bmi != null}">
-		<h1>BMI ${bmi}는 ${health}입니다.</h1>
-	</c:if>
+
+	<%-- session에 저장된 cart 속성 지우기 --%>
+	<c:remove var="cart" scope="session" />
+	
+	<%-- 장바구니 목록 확인하러 가기 --%>
+	<c:redirect url="03_cart_list.jsp" />
+
 </body>
 </html>

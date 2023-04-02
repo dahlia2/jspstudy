@@ -63,6 +63,7 @@
 		<div>인덱스: ${k.index}, 순번: ${k.count}, 요소: ${job}</div>
 	</c:forEach>
 	
+	
 	<%-- 객체 + 리스트 --%>
 	<%
 		List<Webtoon> webtoonList = new ArrayList<>();
@@ -72,17 +73,16 @@
 		webtoonList.add(new Webtoon(418, "텐션", 9.95, LocalDate.of(2022, 12, 7)));
 		webtoonList.add(new Webtoon(419, "HBLJ", 9.96, LocalDate.of(2022, 12, 14)));
 		pageContext.setAttribute("webtoonList", webtoonList);
-	%> <!-- 원래는 데베에서 가져올 거라 중요 x -->
-	
+	%>
 	<table border="1">
 		<tbody>
-			<c:forEach var="webtoon" items="${webtoonList}">
-			<tr style="border-top: 1px solid gray; boder-bottom: 1px solid gray;">
-				<td>${webtoon.webtoonNo}</td>
-				<td>${webtoon.title}</td>
-				<td>${webtoon.star}</td>
-				<td>${webtoon.uploadDate}</td>
-			</tr>
+			<c:forEach var="webtoon" items="${webtoonList}">			
+				<tr>
+					<td>${webtoon.webtoonNo}</td>
+					<td>${webtoon.title}</td>
+					<td>${webtoon.star}</td>
+					<td>${webtoon.uploadDate}</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
