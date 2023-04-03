@@ -1,0 +1,136 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import domain.BoardDTO;
+
+public class BoardDAO {
+
+	// 모든 메소드가 사용할 공통 필드
+	private Connection con;
+	private PreparedStatement ps;
+	private ResultSet rs;
+	private String sql;
+	
+	// Connection 관리를 위한 DataSource 필드
+	private DataSource dataSource;
+	
+	// Singleton Pattern으로 DAO 생성하기
+	private static BoardDAO dao = new BoardDAO();
+	private BoardDAO() {    // 아무도 사용할 수 없게 생성자를 private 처리
+		// context.xml에서 <Resource name="jdbc/GDJ61" />인 Resource를 읽어서 DataSource 객체 생성하기 (JNDI 방식)
+		
+		try {   // context와 맞추는 코드 (톰캣 사용을 위해)
+			Context context = new InitialContext(); // ArrayList 처럼 구현받음
+			Context envContext = (Context)context.lookup("java:comp/env");  // 톰캣 설정
+			dataSource = (DataSource)envContext.lookup("jdbc/GDJ61");  // 진짜 이름(지정값이 있음)
+			/*
+		 	위에 3문장을 이렇게 쓸 수도 있음
+			Context context = new InitialContext();
+			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/GDJ61");
+			*/
+		
+		} catch(NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	public static BoardDAO getInstance() {   // 클래스를 통한 메소드로 값을 가져갈 수 있도록 함
+		return dao;
+	}
+	
+	// 자원(Connection, PreparedStatement, ResultSet) 반납하기
+	private void close() {
+		try {
+			if(rs != null) rs.close();
+			if(ps != null) ps.close();
+			if(con != null) con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 게시글 목록 반환하기
+	public List<BoardDTO> selectBoardList() {
+		
+		// 1. ArrayList 생성
+		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
+		
+		try {
+			
+			// 2. DataSource로부터 Connection 얻어 오기
+			con = dataSource.getConnection();
+			
+			// 3. 실행할 쿼리문
+			sql = "SELECT BOARD_NO, TITLE, CONTENT, MODIFIED_DATE, CREATED_DATE FROM BOARD ORDER BY BOARD_NO DESC";
+			
+			// 4. 쿼리문을 실행할 PreparedStatement 객체 생성
+			ps = con.prepareStatement(sql);
+			
+			// 5. PreparedStatement 객체를 이용해 쿼리문 실행(SELECT문 실행은 executeQuery 메소드로 한다.)
+			rs = ps.executeQuery();  // 받아오는 타입은 ResultSet  // rs의 결과 집합 = INSERT문 2개
+			
+			// 6. ResultSet 객체(결과 집합)를 이용해서 ArrayList를 만듬
+			while(rs.next()) {
+				
+				// Step 1. Board 테이블의 결과 행(ROW)을 읽는다.
+				int board_no = rs.getInt("BOARD_NO");
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				Date modified_date = rs.getDate("MODIFIED_DATE");
+				Date created_date = rs.getDate("CREATED_DATE");
+
+				// Step 2. 읽은 정보를 이용해서 BoardDTO 객체를 만든다.  (읽은 결과 하나당 BoardDTO 객체로 만든다)
+				BoardDTO board = new BoardDTO(board_no, title, content, modified_date, created_date);
+				
+				// Step 3. BoardDTO 객체를 ArrayList에 추가한다.
+				boardList.add(board);
+				
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 예외 발생 여부와 상관 없이 항상 자원의 반납을 해야 한다.
+			close();
+		}
+		
+		// 7. ArrayList 반환
+		return boardList;
+		
+	}
+	
+	// 게시글 반환하기
+	public BoardDTO selectBoardByNo(int board_no) {
+		
+		return null;
+	}
+	
+	// 게시글 삽입하기
+	public int insertBoard(BoardDTO board) {
+		
+		return 0;
+	}
+	
+	// 게시글 수정하기
+	public int updateBoard(BoardDTO board) {
+		
+		return 0;
+	}
+	
+	// 게시글 삭제하기
+	public int deleteBoard(int board_no) {
+		
+		return 0;
+	}
+	
+}
