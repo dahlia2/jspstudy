@@ -17,5 +17,5 @@ public class BoardDTO {
 	private String title;
 	private String content;
 	private Date modified_date;
-	private Date created_date;
+	private Date created_date;  // 실무에서는 Date 클래스보단 String으로 처리함
 }
