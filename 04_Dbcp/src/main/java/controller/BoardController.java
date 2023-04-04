@@ -38,6 +38,7 @@ public class BoardController extends HttpServlet {
 		ActionForward af = null;
 		
 		// URLMapping에 따른 서비스 생성 (요청에 따른 서비스 생성)
+	// 서비스 선택
 		switch(urlMapping) {
 		case "/getAllBoardList.do":   // 실무에서는 getAllBoard's'라고 쓰는 경우가 많음
 			service = new BoardListService();

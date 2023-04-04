@@ -118,14 +118,46 @@ public class BoardDAO {
 	// 게시글 삽입하기
 	public int insertBoard(BoardDTO board) {
 		
-		return 0;
+		// 1. 삽입 결과 변수 선언
+		int insertResult = 0;
+		
+		try {
+			
+			// 2. DataSource로부터 Connection 얻어 오기
+			con = dataSource.getConnection();
+			
+			// 3. 실행할 쿼리문  (게시판번호, 타이틀, 내용, 최종수정일, 작성일)
+			sql = "INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, ?, ?, NULL, SYSDATE)";  // 변수(타이틀, 내용) 처리할 때 물음표 처리
+			
+			// 4. 쿼리문을 실행할 PreparedStatement 객체 생성
+			ps = con.prepareStatement(sql);
+			
+			// 5. 쿼리문의 변수 값 전달하기
+			ps.setString(1, board.getTitle());    // 1번째 물음표(?)에 title 전달하기 -> DTO의 객체 중 title
+			ps.setString(2, board.getContent());  // 2번째 물음표(?)에 content 전달하기
+			
+			// 6. PreparedStatement 객체를 이용해 쿼리문 실행(INSERT문 실행은 excuteUpdate 메소드로 한다.)
+			insertResult = ps.executeUpdate();  // 결과는 성공1, 실패0
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {  // 예외가 발생하든 아니든 항상 실행되는 finally문
+			
+			// 예외 발생 여부와 상관 없이 항상 자원의 반납을 해야 한다.
+			close();
+		}
+		
+		// 7. 삽입 결과 반환
+		return insertResult;
 	}
 	
 	// 게시글 수정하기
 	public int updateBoard(BoardDTO board) {
-		
 		return 0;
-	}
+		
+		}
+		
+		
 	
 	// 게시글 삭제하기
 	public int deleteBoard(int board_no) {

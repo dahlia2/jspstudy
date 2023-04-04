@@ -15,7 +15,7 @@
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js">  // 헤드에 스크립트 넣어주면 순서 신경 안 써도 됨
 	$(function(){
 		// 서브밋
-		$('frm_write').on('submit', function(event){
+		$('#frm_write').on('submit', function(event){
 			if($('#title').val() === ''){
 				alert('제목은 필수입니다.');
 				event.preventDefault(); // 서브밋을 막는다
@@ -24,7 +24,7 @@
 		})
 		
 		// 목록
-		$('btn_list').on('click', function(){
+		$('#btn_list').on('click', function(){
 			location.href='${contextPath}/getAllBoardList.do';
 		})
 	})
