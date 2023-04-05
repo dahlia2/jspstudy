@@ -45,6 +45,9 @@ public class PostController extends HttpServlet {
 		case "/write.post" :  // 서비스가 필요하지 않은 post  // 서비스는 null path는 write뷰로 이동
 			path = "post/write.jsp"; 
 			break;
+		case "/detail.post" :  
+			path = "post/write.jsp";
+			break;
 		}
 		
 		// 선택된 서비스 실행
