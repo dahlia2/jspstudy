@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.IPostService;
+import service.PostDeleteService;
+import service.PostDetailService;
 import service.PostListService;
 import service.PostSaveService;
 
@@ -19,11 +21,12 @@ public class PostController extends HttpServlet {
        
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 요청, 응답 인코딩
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		// urlMapping
+	    // urlMapping
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String urlMapping = requestURI.substring(contextPath.length());
@@ -45,8 +48,11 @@ public class PostController extends HttpServlet {
 		case "/write.post" :  // 서비스가 필요하지 않은 post  // 서비스는 null path는 write뷰로 이동
 			path = "post/write.jsp"; 
 			break;
-		case "/detail.post" :  
-			path = "post/write.jsp";
+		case "/detail.post":
+			service = new PostDetailService();
+			break;
+		case "/delete.post":
+			service = new PostDeleteService();
 			break;
 		}
 		

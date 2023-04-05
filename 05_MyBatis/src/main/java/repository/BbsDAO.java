@@ -31,7 +31,7 @@ public class BbsDAO {
 		}
 	}
 	
-	public static BbsDAO getinstance() {	
+	public static BbsDAO getInstance() {	
 		return dao;
 	}
 	
@@ -67,6 +67,7 @@ public class BbsDAO {
 		}
 		ss.close();
 		return insertResult;
+		
 	}
 	
 	
@@ -79,20 +80,17 @@ public class BbsDAO {
 		}
 		ss.close();
 		return updateResult;
-		
 	}
-	
 	
 	// 5. 삭제
 	public int deleteBbs(int bbsNo) {
 		SqlSession ss = factory.openSession(false);
-		int deleteResult = ss.delete(NS + "deleteResult", bbsNo);
+		int deleteResult = ss.delete(NS + "deleteBbs", bbsNo);
 		if(deleteResult == 1) {
 			ss.commit();
 		}
 		ss.close();
 		return deleteResult;
-		}
 	}
 	
-
+}
