@@ -40,7 +40,7 @@ public class BbsTest {
 		assertNotNull(dao.selectBbsByNo(1));
 	}
 	
-	//@Test
+	@Test
 	public void 삽입테스트() {
 		BbsDTO bbs = new BbsDTO();
 		bbs.setTitle("테스트제목");
@@ -57,7 +57,7 @@ public class BbsTest {
 		assertEquals(1, dao.updateBbs(bbs));
 	}
 	
-	@Test
+	//@Test
 	public void 삭제테스트() {
 		assertEquals(1, dao.deleteBbs(1));  // BBS_NO=1 삭제
 	}
