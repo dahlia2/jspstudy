@@ -13,6 +13,8 @@ public class MemberRemoveService implements IMemberService {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
 		int deleteResult = MemberDAO.getInstance().deleteMember(memberNo);
+		
+		response.setContentType(null);
 	}
 
 }
