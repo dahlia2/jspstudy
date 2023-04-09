@@ -19,7 +19,6 @@ public class MemberModifyService implements IMemberService {
 		Member member = new Member();
 		member.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
 		member.setName(request.getParameter("name"));
-		member.setGender(request.getPara 6                    meter("gender"));
 		member.setAddress(request.getParameter("address"));
 		
 		// Member member 객채의 정보를 이용해 DB의 내용을 수정

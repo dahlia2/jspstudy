@@ -22,8 +22,8 @@
 		// 삭제 링크 클릭
 		$('.link_remove').on('click', function(event){
 			if(confirm('삭제할까요?') == false){
-				event.preventDefault();    // <button> 태그의 기본 동작인 submit 속성의 동작을 막는다.
-				return;  // 같이 쓰는 걸 권장
+				event.preventDefault();  // <button> 태그의 기본 동작인 submit 속성의 동작을 막는다.
+				return;   // 같이 하는 걸 권장
 			}
 		})
 	})
@@ -53,7 +53,7 @@
 							<td><a href="${contextPath}/getBoardByNo.do?board_no=${board.board_no}">${board.title}</a></td>
 							<td><fmt:formatDate value="${board.created_date}" pattern="yy.MM.dd" /></td>
 							<td>
-								<form method="post"  action="${contextPath}/removeBoard.do">
+								<form method="post" action="${contextPath}/removeBoard.do">
 									<input type="hidden" name="board_no" value="${board.board_no}">
 									<button class="link_remove"><i class="fa-solid fa-x"></i></button>  <!-- 버튼에 x 모양 -->
 								</form>
