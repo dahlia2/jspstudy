@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.stu">
+
+	
+	<!-- 1. 목록 -->
+	<select id="selectAllStuList" resultType="Stu">
+		SELECT STU_NO, NAME, KOR, ENG, MATH, AVE, GRADE
+		FROM STUDENT
+		ORDER BY STU_NO
+	</select>
+	
+	<!-- 2. 전체 학생 수 -->
+	<select id="getAllStuCount" resultType="int">
+		SELECT COUNT(*)
+		FROM STUDENT
+	</select>
+	
+	<!-- 3. 전체 점수 평균 -->
+	<select id="getAllStuAverage" resultType="double">
+		SELECT NVL(AVG(AVE))  <!-- AVE 칼럼에 평균함수 AVG ,  NVL 함수로 null 값일 시 0 적용 -->
+		FROM STUDENT
+	</select>
+	
+	
+	<!-- 4. 삽입  -->
+	<!-- 입력한 국어, 영어, 수학 점수로 평균과 등급 구하기 -->
+	<insert id="insertStu" parameterType="Stu">
+		INSERT INTO STUDENT
+			(STU_NO
+			, NAME
+			, KOR
+			, ENG
+			, MATH
+			, AVE
+			, GRADE)
+		VALUES
+			(STUDENT_SEQ.NEXTVAL
+			, #{name}
+			, #{kor}
+			, #{eng}
+			, #{math}
+			, (#{kor} + #{eng} + #{math}) / 3
+			, CASE
+				WHEN (#{kor} + #{eng} + #{math}) /3 >= 90 THEN 'A'
+				WHEN (#{kor} + #{eng} + #{math}) /3 >= 80 THEN 'B'
+				WHEN (#{kor} + #{eng} + #{math}) /3 >= 70 THEN 'C'
+				WHEN (#{kor} + #{eng} + #{math}) /3 >= 60 THEN 'D'
+				ELSE 'F'
+			END)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 수정 -->
+	<update id="updateStu" parameterType="Stu">
+		UPDATE STUDENT
+		   SET NAME = #{name}
+		     , KOR = #{kor}
+		     , ENG = #{eng}
+		     , MATH = #{math}
+		 WHERE STU_NO = #{stuNo}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteStu" parameterType="int">
+		DELETE
+		  FROM STUDENT
+		 WHERE STU_NO = #{stuNo}
+	</delete>
+
+</mapper>
