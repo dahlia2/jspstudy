@@ -27,6 +27,7 @@ public class BoardDAO {
 	
 	// Singleton Pattern으로 DAO 생성하기
 	private static BoardDAO dao = new BoardDAO();
+	
 	private BoardDAO() {    // 아무도 사용할 수 없게 생성자를 private 처리
 		// context.xml에서 <Resource name="jdbc/GDJ61" />인 Resource를 읽어서 DataSource 객체 생성하기 (JNDI 방식)
 		
@@ -44,6 +45,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}
+	
 	public static BoardDAO getInstance() {   // 클래스를 통한 메소드로 값을 가져갈 수 있도록 함
 		return dao;
 	}
