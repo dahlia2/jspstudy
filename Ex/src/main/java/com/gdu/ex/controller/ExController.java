@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gdu.ex.common.ActionForward;
+import com.gdu.ex.service.ExDetailService;
 import com.gdu.ex.service.ExListService;
+import com.gdu.ex.service.ExRemoveService;
+import com.gdu.ex.service.ExSaveService;
 import com.gdu.ex.service.ExService;
 
 @WebServlet("*.do")
@@ -25,17 +29,36 @@ public class ExController extends HttpServlet {
 		
 		ExService service = null;
 		
-		String path = null;
+		ActionForward af = null;
 		
 		switch(urlMapping) {
 		case "/list.do":
 			service = new ExListService();
 			break;
+		case "/detail.do":
+			service = new ExDetailService();
+			break;
+		case "/write.do":
+			// ex/write.jsp로 forward하기(단순이동) - ActionForward 객체 만들기
+			af = new ActionForward("ex/write.jsp", false);
+			break;
+		case "/save.do":
+			service = new ExSaveService();
+			break;
+		case "/remove.do":
+			service = new ExRemoveService();
+			break;
 		}
 		
-		path = service.execute(request, response);
+		if(service != null) {
+			af = service.execute(request, response);
+		}
 		
-		request.getRequestDispatcher(path).forward(request, response);
+		if(af.isRedirect()) {
+			response.sendRedirect(af.getPath());
+		} else {
+			request.getRequestDispatcher(af.getPath()).forward(request, response);
+		}
 		
 	}
 

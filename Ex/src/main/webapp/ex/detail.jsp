@@ -10,22 +10,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	function fnDetail(exNo){
-		location.href = '${contextPath}/detail.do?exNo=' + exNo;
-	}
-	function fnWrite(){
-		location.href = '${contextPath}/write.do';
+	function fnRemove(){
+		if(confirm('삭제?????')){
+			location.href = '${contextPath}/remove.do?exNo=${ex.exNo}';
+		}
 	}
 </script>
 </head>
 <body>
-	<c:forEach items="${exList}" var="ex">
-		<div style="border: 1px solid gray; cursor: pointer;" onclick="fnDetail(${ex.exNo})">
-			<div>${ex.exNo}</div>
-			<div>${ex.exContent}</div>
-			<div>${ex.exCreatedAt}</div>
-		</div>
-	</c:forEach>
-	<input type="button" value="작성하러가기" onclick="fnWrite()">
+	<div>${ex.exNo}</div>
+	<div>${ex.exContent}</div>
+	<div>${ex.exCreatedAt}</div>
+	<div><input type="button" value="삭제" onclick="fnRemove()"></div>
 </body>
 </html>
